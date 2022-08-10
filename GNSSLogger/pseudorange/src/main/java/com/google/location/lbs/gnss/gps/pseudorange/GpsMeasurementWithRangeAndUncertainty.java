@@ -22,7 +22,6 @@ package com.google.location.lbs.gnss.gps.pseudorange;
  * <p>The container extends {@link GpsMeasurement} to additionally include {@link
  * #pseudorangeMeters} and {@link #pseudorangeUncertaintyMeters}.
  */
-@SuppressWarnings("nullness")
 class GpsMeasurementWithRangeAndUncertainty extends GpsMeasurement {
 
   /** Pseudorange measurement (meters) */

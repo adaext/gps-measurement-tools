@@ -21,11 +21,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.primitives.Longs;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 /** A simple class to represent time unit used by GPS. */
-@SuppressWarnings("nullness")
 public class GpsTime implements Comparable<GpsTime> {
   public static final int MILLIS_IN_SECOND = 1000;
   public static final int SECONDS_IN_MINUTE = 60;
@@ -271,7 +271,7 @@ public class GpsTime implements Comparable<GpsTime> {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(@Nullable Object other) {
     if (!(other instanceof GpsTime)) {
       return false;
     }

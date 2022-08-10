@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A class to extract the fields of the GPS navigation message from the raw bytes received from the
@@ -37,7 +38,6 @@ import java.util.concurrent.TimeUnit;
  * <p>References: http://www.gps.gov/technical/icwg/IS-GPS-200D.pdf and
  * http://www.gps.gov/technical/ps/1995-SPS-signal-specification.pdf
  */
-@SuppressWarnings("nullness")
 public class GpsNavigationMessageStore {
 
   private static final byte IONOSPHERIC_PARAMETERS_PAGE_18_SV_ID = 56;
@@ -157,14 +157,14 @@ public class GpsNavigationMessageStore {
   private static final int I1UTC_INDEX = 150;
 
   /** Partially decoded intermediate ephemerides */
-  private final IntermediateEphemeris[] partiallyDecodedIntermediateEphemerides =
+  private final @Nullable IntermediateEphemeris[] partiallyDecodedIntermediateEphemerides =
       new IntermediateEphemeris[MAX_NUMBER_OF_SATELLITES];
 
   /** Fully decoded intermediate ephemerides */
   private final IntermediateEphemeris[] fullyDecodedIntermediateEphemerides =
       new IntermediateEphemeris[MAX_NUMBER_OF_SATELLITES];
 
-  private IonosphericModelProto decodedIonosphericObj;
+  private @Nullable IonosphericModelProto decodedIonosphericObj;
 
   /**
    * Builds and returns the current {@link GpsNavMessageProto} filling the different ephemeris for
@@ -578,7 +578,7 @@ public class GpsNavigationMessageStore {
    * @return a {@link IntermediateEphemeris} to update with the available data, {@code null} if
    *     there is no need to update a {@link IntermediateEphemeris}.
    */
-  private IntermediateEphemeris findIntermediateEphemerisToUpdate(
+  private @Nullable IntermediateEphemeris findIntermediateEphemerisToUpdate(
       byte prn, int subframe, int issueOfData) {
     // find out if we have fully decoded up-to-date ephemeris first
     IntermediateEphemeris fullyDecodedIntermediateEphemeris =
